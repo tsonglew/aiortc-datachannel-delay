@@ -71,7 +71,10 @@ function start () {
 			serverVideo.srcObject = evt.streams[0];
 		}
 	});
-	ch = pc.createDataChannel("chat");
+	ch = pc.createDataChannel("chat", {
+		ordered: false,
+		maxRetransmits: 0,
+	});
 	ch.addEventListener("message", function (evt) {
 		console.log(Date.now() - JSON.parse(evt.data).now);
 	});
